@@ -11,37 +11,43 @@
 <body>
     <canvas id="particles"></canvas>
     
-    <header class="forum-header">
-        <a href="index.html" style="text-decoration: none; color: white;"><div class="logo">POROK RP</div></a>
-        <div class="auth-buttons">
-            <a href="#" class="btn secondary auth-btn">Войти</a>
+    <header>
+        <a href="index.html" class="logo" style="text-decoration:none;">POROK RP</a>
+        <div class="header-right">
+            <a href="#" class="btn-login">Войти</a>
+            <div class="menu-icon" id="menuToggle"><span></span><span></span><span></span></div>
         </div>
+        <nav class="nav-menu" id="navMenu">
+            <div class="close-menu" id="closeMenu">&times;</div>
+            <a href="index.html">Главная</a>
+            <a href="forum.html">Форум</a>
+        </nav>
     </header>
 
     <div class="forum-container" data-aos="fade-up">
         <div class="forum-intro">
             <h1 class="gradient-text">Форум</h1>
-            <p>Официальная площадка для общения и жалоб</p>
+            <p>Выберите раздел для просмотра тем</p>
         </div>
 
-        <div class="category-card">
+        <a href="#" class="category-card">
             <div class="cat-info">
                 <h3>Общий раздел</h3>
                 <p>Важные новости и обсуждения проекта</p>
             </div>
-            <div class="stats">
-                <span class="role role-admin">Администрация</span>
-            </div>
-        </div>
+            <div class="stats"><span class="role role-admin">Админ</span></div>
+        </a>
 
-        <div class="category-card">
+        <a href="#" class="category-card">
             <div class="cat-info">
                 <h3>Жалобы</h3>
-                <p>На игроков, лидеров и администрацию</p>
+                <p>Раздел для подачи апелляций и жалоб</p>
             </div>
-            <div class="stats">
-                <span class="role role-mod">Модерация</span>
-            </div>
+            <div class="stats"><span class="role role-mod">Модер</span></div>
+        </a>
+        
+        <div style="text-align:center; opacity: 0.3; margin-top: 30px;">
+            <p>В этих разделах пока нет тем. Они появятся после подключения базы.</p>
         </div>
     </div>
 
