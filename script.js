@@ -1,6 +1,11 @@
-AOS.init({ duration: 1200, once: true });
+// Инициализация анимаций появления
+AOS.init({
+    duration: 1000,
+    once: false, // Чтобы анимация срабатывала каждый раз при скролле вверх/вниз
+    mirror: true
+});
 
-// Логика частиц (без изменений, они идеальны)
+// Мятные частицы
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -22,7 +27,7 @@ class Particle {
         if (this.y > canvas.height) this.y = 0; else if (this.y < 0) this.y = canvas.height;
     }
     draw() {
-        ctx.fillStyle = 'rgba(152, 255, 211, 0.35)';
+        ctx.fillStyle = 'rgba(152, 255, 211, 0.3)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -39,13 +44,18 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// РАБОТА БУРГЕРА
+// Бургер меню
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-
-menuToggle.onclick = () => {
-    navMenu.classList.toggle('active');
-};
+if(menuToggle) {
+    menuToggle.onclick = () => { navMenu.classList.toggle('active'); };
+}
 
 init();
 animate();
+
+window.onresize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+};
