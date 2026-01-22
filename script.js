@@ -1,4 +1,5 @@
-AOS.init({ duration: 1200, once: true });
+// Запуск анимаций появления
+AOS.init();
 
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
@@ -6,7 +7,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
-const particleColor = 'rgba(152, 255, 211, 0.4)'; // Мятный цвет
+const particleColor = 'rgba(152, 255, 211, 0.4)';
 
 class Particle {
     constructor() {
@@ -41,7 +42,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Меню
+// Бургер
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 menuToggle.onclick = () => {
@@ -57,7 +58,7 @@ window.addEventListener('resize', () => {
     init();
 });
 
-// Запоминаем: кнопка сообщества перенаправляет на форум
-document.querySelector('.community-btn').addEventListener('click', function(e) {
-    console.log('Redirecting to forum...');
+// Кнопка Сообщество ведет на форум
+document.querySelector('.btn.secondary').addEventListener('click', function() {
+    console.log("Redirecting to forum...");
 });
