@@ -1,18 +1,26 @@
+// ИНИЦИАЛИЗАЦИЯ АНИМАЦИЙ (AOS)
+AOS.init({
+    duration: 1000, // Скорость анимации
+    once: false,    // Анимировать ли каждый раз при скролле или только один раз
+    mirror: true    // Анимировать ли блоки при скролле вверх
+});
+
+// КАНВАС И ЧАСТИЦЫ (Мятные)
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
+const particleColor = 'rgba(152, 255, 211, 0.4)';
 
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5;
-        this.speedX = Math.random() * 0.4 - 0.2;
-        this.speedY = Math.random() * 0.4 - 0.2;
+        this.size = Math.random() * 2;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
     }
     update() {
         this.x += this.speedX;
@@ -23,7 +31,7 @@ class Particle {
         else if (this.y < 0) this.y = canvas.height;
     }
     draw() {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.fillStyle = particleColor;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -32,25 +40,31 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 80; i++) {
         particlesArray.push(new Particle());
     }
 }
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-    }
+    particlesArray.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
 }
+
+// ЛОГИКА МЕНЮ
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+init();
+animate();
 
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     init();
 });
-
-init();
-animate();
