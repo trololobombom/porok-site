@@ -1,67 +1,129 @@
-// Инициализация анимаций
-AOS.init({ duration: 1000, once: true });
+// 1. ИНИЦИАЛИЗАЦИЯ SUPABASE
+const SUPABASE_URL = 'https://hhfwrtmcdhyemrirnsjc.supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_MarNd_W69hGqojLgHL0LJw_2V4WP6D7';
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Меню
+// 2. ИНИЦИАЛИЗАЦИЯ АНИМАЦИЙ (AOS)
+AOS.init({
+    duration: 1000,
+    once: true,
+    easing: 'ease-out-back'
+});
+
+// 3. ЛОГИКА БУРГЕР-МЕНЮ (СТАРАЯ АНИМАЦИЯ)
 const menuToggle = document.getElementById('menuToggle');
 const closeMenu = document.getElementById('closeMenu');
 const navMenu = document.getElementById('navMenu');
 
-if(menuToggle) menuToggle.onclick = () => navMenu.classList.add('active');
-if(closeMenu) closeMenu.onclick = () => navMenu.classList.remove('active');
+if (menuToggle) {
+    menuToggle.onclick = () => navMenu.classList.add('active');
+}
+if (closeMenu) {
+    closeMenu.onclick = () => navMenu.classList.remove('active');
+}
 
-// ЛОГИКА ВХОДА (Для теста)
+// 4. СИСТЕМА АВТОРИЗАЦИИ И ПРАВ
 const loginBtn = document.getElementById('loginBtn');
-if(loginBtn) {
+
+if (loginBtn) {
     loginBtn.onclick = () => {
-        const user = prompt("Введите логин:");
-        const pass = prompt("Введите пароль:");
-        
-        if(user === "Administrator" && pass === "Admin123") {
-            alert("Доступ разрешен. Приветствуем, Команда форума!");
-            localStorage.setItem('role', 'admin');
-            location.reload();
+        const userLogin = prompt("Логин:");
+        const userPass = prompt("Пароль:");
+
+        // Проверка твоих данных (пока без Auth-модуля, через локальную проверку)
+        if (userLogin === "Administrator" && userPass === "Admin123") {
+            alert("Доступ разрешен. Добро пожаловать, Команда форума!");
+            localStorage.setItem('userRole', 'team'); // Выдаем краску КФ
+            localStorage.setItem('userName', 'Administrator');
+            location.reload(); 
         } else {
-            alert("Ошибка доступа!");
+            alert("Ошибка доступа: Неверные данные!");
         }
     };
 }
 
-// Проверка прав при загрузке
-if(localStorage.getItem('role') === 'admin') {
-    document.body.classList.add('is-admin');
-    const badge = document.getElementById('adminBadge');
-    if(badge) badge.style.display = 'block';
-    const lBtn = document.getElementById('loginBtn');
-    if(lBtn) lBtn.style.display = 'none';
-}
+// ФУНКЦИЯ ПРИМЕНЕНИЯ РОЛЕЙ ПРИ ЗАГРУЗКЕ
+function loadUserSession() {
+    const role = localStorage.getItem('userRole');
+    const name = localStorage.getItem('userName');
 
-// Частицы
+    if (role) {
+        // Добавляем класс залогиненного пользователя
+        document.body.classList.add('is-logged-in');
+        
+        // Если это Команда Форума — включаем Админ-Панель (АП)
+        if (role === 'team') {
+            document.body.classList.add('is-admin');
+        }
+
+        // Находим плашку ника в шапке и красим её
+        const badge = document.getElementById('adminBadge');
+        if (badge) {
+            badge.innerText = name;
+            badge.style.display = 'block';
+            badge.className = `user-badge role-${role}`; // Применяет цвет из CSS
+        }
+
+        // Скрываем кнопку "Войти", так как мы уже внутри
+        if (loginBtn) loginBtn.style.display = 'none';
+    }
+}
+loadUserSession();
+
+// 5. ФОНОВЫЕ ЧАСТИЦЫ (МЯТНЫЙ ЦВЕТ)
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-let particles = [];
-class P {
-    constructor() {
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-        this.s = Math.random()*1.5;
-        this.vy = Math.random()*0.5 + 0.1;
+
+if (canvas) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let particlesArray = [];
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5;
+            this.speedY = Math.random() * 0.4 + 0.1; // Плавное движение вверх
+        }
+        update() {
+            this.y -= this.speedY;
+            if (this.y < 0) {
+                this.y = canvas.height;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(152, 255, 211, 0.3)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    update() {
-        this.y -= this.vy;
-        if(this.y < 0) this.y = canvas.height;
+
+    function initParticles() {
+        particlesArray = [];
+        for (let i = 0; i < 80; i++) {
+            particlesArray.push(new Particle());
+        }
     }
-    draw() {
-        ctx.fillStyle = 'rgba(152, 255, 211, 0.3)';
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI*2); ctx.fill();
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
     }
+
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+    });
 }
-for(let i=0; i<100; i++) particles.push(new P());
-function anim() {
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(anim);
-}
-anim();
-window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
