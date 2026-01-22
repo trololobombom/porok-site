@@ -1,15 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+body { background: #080808; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-body {
-    background-color: #080808;
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-}
-
-#particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-
-/* ИСПРАВЛЕННАЯ ШАПКА */
+/* Фикс шапки: убираем лишний блюр, который мешал контенту */
 header {
     display: flex;
     justify-content: space-between;
@@ -18,86 +10,49 @@ header {
     position: fixed;
     width: 100%;
     z-index: 100;
-    background: transparent; /* Убрал размытость фона здесь */
 }
 
 .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; }
 
-/* СКРЫВАЕМ ССЫЛКИ В ШАПКЕ НА ПК, ЕСЛИ ОНИ НЕ НУЖНЫ */
-.nav-menu {
-    display: none; /* Прячем "уродские" ссылки */
-}
-
-/* БУРГЕР ПОЯВЛЯЕТСЯ ПРИ КЛИКЕ */
+/* Убираем синие "уродские" ссылки браузера */
+.nav-menu { display: none; }
 .nav-menu.active {
     display: flex;
     position: fixed;
     top: 0; right: 0;
-    width: 250px; height: 100vh;
-    background: #0a0a0a;
+    width: 280px; height: 100vh;
+    background: rgba(10, 10, 10, 0.98);
     flex-direction: column;
-    padding: 100px 30px;
-    gap: 20px;
+    padding: 100px 40px;
+    gap: 30px;
+    z-index: 99;
     border-left: 1px solid rgba(152, 255, 211, 0.1);
 }
 
 .nav-menu a {
     color: white;
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: 0.3s;
 }
-
 .nav-menu a:hover { color: #98FFD3; }
 
-/* ГЕРОЙ-СЕКЦИЯ */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 35vh; 
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
+/* Элементы страницы */
+.hero { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding-top: 35vh; text-align: center; }
+.gradient-text { font-size: clamp(40px, 8vw, 75px); font-weight: 900; background: linear-gradient(180deg, #98FFD3 0%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-.gradient-text {
-    font-size: clamp(40px, 8vw, 75px);
-    font-weight: 900;
-    background: linear-gradient(180deg, #98FFD3 0%, #FFFFFF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 25px;
-}
+.btn { padding: 16px 45px; border-radius: 100px; text-decoration: none; font-weight: 700; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; cursor: pointer; border: none; }
+.btn.primary { background: #98FFD3; color: black; }
+.btn.secondary { border: 1px solid rgba(255,255,255,0.15); color: white; background: rgba(255,255,255,0.05); }
 
-/* КНОПКИ */
-.cta-buttons { display: flex; gap: 20px; justify-content: center; }
-.btn {
-    padding: 16px 45px;
-    text-decoration: none;
-    border-radius: 100px;
-    font-weight: 700;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: inline-block;
-}
-.btn.primary { background: #98FFD3; color: #000; box-shadow: 0 10px 25px rgba(152, 255, 211, 0.2); }
-.btn.secondary { border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; background: rgba(255, 255, 255, 0.03); }
+/* Форум дизайн */
+.forum-container { max-width: 1000px; margin: 160px auto 50px; padding: 0 20px; }
+.category-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(152, 255, 211, 0.05); border-radius: 20px; padding: 30px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+.role { padding: 5px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+.role-admin { background: rgba(152, 255, 211, 0.1); color: #98FFD3; border: 1px solid #98FFD3; }
+.role-mod { background: rgba(128, 216, 255, 0.1); color: #80D8FF; border: 1px solid #80D8FF; }
 
-/* ФОРУМ */
-.forum-container { max-width: 1000px; margin: 150px auto 50px; padding: 0 20px; position: relative; z-index: 1; }
-.category-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(152, 255, 211, 0.05);
-    border-radius: 24px;
-    padding: 30px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.role-admin { color: #98FFD3; border: 1px solid #98FFD3; background: rgba(152, 255, 211, 0.1); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; }
-
-/* МЕНЮ ИКОНКА */
 .menu-icon { cursor: pointer; z-index: 101; }
-.menu-icon span { display: block; width: 28px; height: 2px; background: #fff; margin: 6px; transition: 0.3s; }
+.menu-icon span { display: block; width: 28px; height: 2px; background: white; margin: 7px; transition: 0.3s; }
+#particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
