@@ -6,7 +6,7 @@
     <title>POROK RP | Главная</title>
     <link rel="stylesheet" href="disayn.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="particles"></canvas>
@@ -14,27 +14,33 @@
     <header>
         <div class="logo">POROK RP</div>
         <div class="menu-icon" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
-        <nav class="nav-menu" id="navMenu">
-            <div class="close-menu" id="closeMenu">&times;</div>
-            <a href="index.html">Главная</a>
-            <a href="forum.html">Форум</a>
-        </nav>
     </header>
 
-    <main class="hero">
-        <section class="content" data-aos="fade-up" data-aos-duration="1000">
+    <nav class="nav-menu" id="navMenu">
+        <div class="close-menu" id="closeMenu">&times;</div>
+        <a href="index.html">Главная</a>
+        <a href="forum.html">Форум</a>
+    </nav>
+
+    <main class="hero section">
+        <div class="content" data-aos="fade-up">
             <h1 class="gradient-text">Проект с нуля</h1>
             <p class="main-desc">POROK RP создаётся без копирования чужих решений. Все системы разрабатываются вручную с упором на честный RP.</p>
             <div class="cta-buttons">
                 <a href="#" class="btn primary">Начать играть</a>
                 <a href="forum.html" class="btn secondary">Сообщество</a>
             </div>
-        </section>
+        </div>
     </main>
+
+    <section class="section about-scroll">
+        <div class="content" data-aos="fade-right">
+            <h2 class="mint-text">Уникальные системы</h2>
+            <p>Мы создаем проект, где каждый игрок может влиять на мир. Никакого копипаста, только авторский код и честная игра.</p>
+        </div>
+    </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
