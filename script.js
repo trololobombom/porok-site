@@ -1,44 +1,40 @@
 AOS.init({ duration: 1000, once: true });
 
-// Меню
 const menuToggle = document.getElementById('menuToggle');
 const closeMenu = document.getElementById('closeMenu');
 const navMenu = document.getElementById('navMenu');
 
-if (menuToggle) {
-    menuToggle.onclick = () => navMenu.classList.add('active');
-}
-if (closeMenu) {
-    closeMenu.onclick = () => navMenu.classList.remove('active');
-}
+if(menuToggle) menuToggle.onclick = () => navMenu.classList.add('active');
+if(closeMenu) closeMenu.onclick = () => navMenu.classList.remove('active');
 
-// Частицы (без изменений)
+// Мятные частицы
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particlesArray = [];
+
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 1.5;
-        this.speedX = Math.random() * 0.4 - 0.2;
-        this.speedY = Math.random() * 0.4 - 0.2;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
     }
     update() {
         this.x += this.speedX; this.y += this.speedY;
-        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+        if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
     }
     draw() {
-        ctx.fillStyle = 'rgba(152, 255, 211, 0.3)';
+        ctx.fillStyle = 'rgba(152, 255, 211, 0.4)';
         ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
     }
 }
 function init() {
     particlesArray = [];
-    for (let i = 0; i < 80; i++) particlesArray.push(new Particle());
+    for (let i = 0; i < 100; i++) particlesArray.push(new Particle());
 }
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
