@@ -1,5 +1,4 @@
-// Инициализация анимаций появления текста
-AOS.init();
+AOS.init({ duration: 1200, once: true });
 
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
@@ -7,15 +6,15 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
-const particleColor = 'rgba(152, 255, 211, 0.35)'; // Мятные частицы
+const particleColor = 'rgba(152, 255, 211, 0.35)'; // Тот самый мятный
 
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.8;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+        this.size = Math.random() * 1.5;
+        this.speedX = Math.random() * 0.4 - 0.2;
+        this.speedY = Math.random() * 0.4 - 0.2;
     }
     update() {
         this.x += this.speedX;
@@ -33,7 +32,7 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    for (let i = 0; i < 95; i++) { particlesArray.push(new Particle()); }
+    for (let i = 0; i < 90; i++) { particlesArray.push(new Particle()); }
 }
 
 function animate() {
@@ -42,13 +41,12 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Меню
+// Бургер меню
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-menuToggle.onclick = () => {
-    navMenu.classList.toggle('active');
-    // Можно добавить анимацию иконок здесь
-};
+if (menuToggle) {
+    menuToggle.onclick = () => { navMenu.classList.toggle('active'); };
+}
 
 init();
 animate();
@@ -57,10 +55,4 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     init();
-});
-
-// Логика перехода на форум для кнопки "Сообщество"
-document.querySelector('.btn.secondary').addEventListener('click', function(e) {
-    // В будущем здесь будет: window.location.href = '/forum';
-    console.log("Запомнил: переход на форум активен");
 });
