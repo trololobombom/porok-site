@@ -2,125 +2,104 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth; /* Плавный переход по ссылкам */
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #080808;
-    color: #ffffff;
+    background: #050505;
+    color: white;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden; /* Разрешаем вертикальный скролл, запрещаем горизонтальный */
+    overflow-x: hidden;
 }
 
 #particles {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 25px 5%;
     position: fixed;
     width: 100%;
     z-index: 100;
-    background: rgba(8, 8, 8, 0.8);
-    backdrop-filter: blur(10px);
 }
 
-.logo { font-weight: 800; letter-spacing: 2px; }
-
-.gradient-text {
-    font-size: clamp(40px, 8vw, 70px);
-    font-weight: 800;
+/* ГРАДИЕНТ В НАЗВАНИИ */
+.gradient-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
     background: linear-gradient(180deg, #98FFD3 0%, #FFFFFF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
 }
 
-.mint-text { color: #98FFD3; margin-bottom: 15px; }
-
-/* КНОПКИ iOS 26 */
-.btn {
-    padding: 16px 40px;
-    text-decoration: none;
-    border-radius: 100px;
-    font-weight: 600;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: inline-block;
-}
-
-.btn.primary { background: #98FFD3; color: #000; box-shadow: 0 10px 20px rgba(152, 255, 211, 0.2); }
-.btn.secondary { border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; margin-left: 10px; }
-
-/* СЕКЦИИ */
-section {
-    min-height: 100vh;
-    padding: 100px 50px;
+/* БУРГЕР МЕНЮ */
+.menu-toggle {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+    gap: 6px;
+    z-index: 101;
 }
 
-.container {
-    display: flex;
-    max-width: 1200px;
-    gap: 50px;
-    align-items: center;
-}
-
-.about-card { flex: 1; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
-
-.image-placeholder {
-    width: 400px;
-    height: 250px;
-    background: linear-gradient(45deg, #111, #1a1a1a);
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #444;
-    border: 1px dashed #333;
-}
-
-/* СЕТКА ПРЕИМУЩЕСТВ */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 50px;
-}
-
-.feature-item {
-    background: rgba(152, 255, 211, 0.02);
-    padding: 40px;
-    border-radius: 30px;
-    border: 1px solid rgba(152, 255, 211, 0.1);
-    text-align: center;
+.menu-toggle span {
+    width: 30px; height: 2px;
+    background: white;
     transition: 0.3s;
 }
 
-.feature-item:hover {
-    background: rgba(152, 255, 211, 0.05);
-    border-color: #98FFD3;
+.nav-links {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 100%; height: 100vh;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    transition: 0.5s;
 }
 
-/* БУРГЕР (то же самое) */
-.nav-menu {
-    position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-    background: #080808; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 30px; transition: 0.5s;
+.nav-links.active { right: 0; }
+.nav-links a { color: white; text-decoration: none; font-size: 1.5rem; }
+
+/* КНОПКИ IOS СТИЛЬ */
+.btns { display: flex; gap: 20px; justify-content: center; }
+
+.btn-mint, .btn-outline {
+    padding: 15px 35px;
+    border-radius: 50px; /* Максимальное закругление */
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
 }
-.nav-menu.active { right: 0; }
+
+.btn-mint {
+    background: #98FFD3;
+    color: black;
+    box-shadow: 0 10px 20px rgba(152, 255, 211, 0.3);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+}
+
+.btn-mint:hover { transform: scale(1.05); }
+
+/* СЕКЦИИ ДЛЯ СКРОЛЛА */
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 10%;
+}
