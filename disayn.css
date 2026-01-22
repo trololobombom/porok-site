@@ -1,121 +1,36 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: #060606;
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-}
-
-#particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 50px;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-}
-
-.logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
-
-/* ОПУСКАЕМ ВЕСЬ КОНТЕНТ НИЖЕ */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 35vh; /* Опустили еще сильнее для эффекта */
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-/* СЕКЦИЯ СО СКРОЛЛОМ */
-.about-scroll {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.gradient-text {
-    font-size: clamp(45px, 9vw, 80px);
-    font-weight: 900;
-    background: linear-gradient(180deg, #98FFD3 0%, #FFFFFF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 25px;
-}
-
-.mint-text { color: #98FFD3; font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
-
-.main-desc, .extra-text {
-    color: rgba(255, 255, 255, 0.55);
-    line-height: 1.7;
-    max-width: 750px;
-    margin: 0 auto 45px;
-    font-size: 1.15rem;
-}
-
-/* КНОПКИ iOS 26 */
-.cta-buttons {
-    display: flex;
-    gap: 18px;
-    justify-content: center;
-}
-
-.btn {
-    padding: 18px 48px;
-    text-decoration: none;
-    border-radius: 100px;
+/* КРАСКИ (РОЛИ) ДЛЯ ФОРУМА */
+.role {
     font-weight: 700;
-    font-size: 0.95rem;
-    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 
-.btn.primary { 
-    background: #98FFD3; 
-    color: #000; 
-    box-shadow: 0 12px 30px rgba(152, 255, 211, 0.2); 
+/* Краска: Администратор (Мятный неон) */
+.role-admin {
+    color: #98FFD3;
+    border: 1px solid rgba(152, 255, 211, 0.3);
+    background: rgba(152, 255, 211, 0.1);
+    box-shadow: 0 0 10px rgba(152, 255, 211, 0.2);
 }
 
-.btn.secondary { 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    color: #fff;
-    background: rgba(255, 255, 255, 0.02);
+/* Краска: Модератор (Голубой) */
+.role-mod {
+    color: #80D8FF;
+    border: 1px solid rgba(128, 216, 255, 0.3);
+    background: rgba(128, 216, 255, 0.1);
 }
 
-.btn:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 15px 35px rgba(152, 255, 211, 0.3);
+/* Краска: Лидер (Золотой) */
+.role-leader {
+    color: #FFD700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.1);
 }
 
-/* БУРГЕР */
-.menu-icon { cursor: pointer; display: flex; flex-direction: column; gap: 7px; z-index: 101; }
-.menu-icon span { display: block; width: 26px; height: 2px; background: #fff; transition: 0.3s; }
-
-.nav-menu {
-    position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-    background: #060606; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 30px; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+/* Краска: Пользователь (Обычный) */
+.role-user {
+    color: rgba(255, 255, 255, 0.6);
 }
-.nav-menu.active { right: 0; }
-.nav-menu a { color: #fff; text-decoration: none; font-size: 1.8rem; font-weight: 800; }
