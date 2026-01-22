@@ -9,6 +9,7 @@ body {
 
 #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
+/* ИСПРАВЛЕННАЯ ШАПКА */
 header {
     display: flex;
     justify-content: space-between;
@@ -17,13 +18,39 @@ header {
     position: fixed;
     width: 100%;
     z-index: 100;
-    background: rgba(8, 8, 8, 0.3);
-    backdrop-filter: blur(10px);
+    background: transparent; /* Убрал размытость фона здесь */
 }
 
 .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; }
 
-/* ГЕРОЙ-СЕКЦИЯ (Опущена вниз) */
+/* СКРЫВАЕМ ССЫЛКИ В ШАПКЕ НА ПК, ЕСЛИ ОНИ НЕ НУЖНЫ */
+.nav-menu {
+    display: none; /* Прячем "уродские" ссылки */
+}
+
+/* БУРГЕР ПОЯВЛЯЕТСЯ ПРИ КЛИКЕ */
+.nav-menu.active {
+    display: flex;
+    position: fixed;
+    top: 0; right: 0;
+    width: 250px; height: 100vh;
+    background: #0a0a0a;
+    flex-direction: column;
+    padding: 100px 30px;
+    gap: 20px;
+    border-left: 1px solid rgba(152, 255, 211, 0.1);
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.nav-menu a:hover { color: #98FFD3; }
+
+/* ГЕРОЙ-СЕКЦИЯ */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -44,19 +71,8 @@ header {
     margin-bottom: 25px;
 }
 
-p {
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.7;
-    margin-bottom: 40px;
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* КНОПКИ iOS 26 */
+/* КНОПКИ */
 .cta-buttons { display: flex; gap: 20px; justify-content: center; }
-
 .btn {
     padding: 16px 45px;
     text-decoration: none;
@@ -65,12 +81,10 @@ p {
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-block;
 }
-
 .btn.primary { background: #98FFD3; color: #000; box-shadow: 0 10px 25px rgba(152, 255, 211, 0.2); }
 .btn.secondary { border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; background: rgba(255, 255, 255, 0.03); }
-.btn:hover { transform: scale(1.05); }
 
-/* ФОРУМ СТИЛИ */
+/* ФОРУМ */
 .forum-container { max-width: 1000px; margin: 150px auto 50px; padding: 0 20px; position: relative; z-index: 1; }
 .category-card {
     background: rgba(255, 255, 255, 0.02);
@@ -81,17 +95,9 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: 0.3s ease;
 }
-.category-card:hover { border-color: #98FFD3; background: rgba(152, 255, 211, 0.03); }
-.cat-info h3 { color: #98FFD3; font-size: 1.5rem; margin-bottom: 5px; }
+.role-admin { color: #98FFD3; border: 1px solid #98FFD3; background: rgba(152, 255, 211, 0.1); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; }
 
-/* КРАСКИ (РОЛИ) */
-.role { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; }
-.role-admin { color: #98FFD3; border: 1px solid #98FFD3; background: rgba(152, 255, 211, 0.1); }
-.role-mod { color: #80D8FF; border: 1px solid #80D8FF; background: rgba(128, 216, 255, 0.1); }
-
-/* БУРГЕР */
-.menu-icon span { display: block; width: 28px; height: 2px; background: #fff; margin: 6px; }
-.about-scroll { min-height: 80vh; display: flex; align-items: center; justify-content: center; }
-.mint-text { color: #98FFD3; font-weight: 800; font-size: 2.5rem; margin-bottom: 20px;}
+/* МЕНЮ ИКОНКА */
+.menu-icon { cursor: pointer; z-index: 101; }
+.menu-icon span { display: block; width: 28px; height: 2px; background: #fff; margin: 6px; transition: 0.3s; }
