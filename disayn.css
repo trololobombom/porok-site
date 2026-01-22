@@ -9,7 +9,7 @@ body {
     background-color: #080808;
     color: #ffffff;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Разрешаем скролл вниз */
 }
 
 #particles {
@@ -34,14 +34,26 @@ header {
 
 .logo { font-weight: 800; letter-spacing: 2px; }
 
-/* ОПУСКАЕМ КОНТЕНТ */
+/* ПЕРВЫЙ ЭКРАН (Опущен) */
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start; /* Прижимаем к верху, чтобы рулить отступом */
+    align-items: flex-start;
     justify-content: center;
-    padding-top: 30vh; /* Опустили на 30% высоты экрана */
+    padding-top: 30vh;
     text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ВТОРОЙ ЭКРАН */
+.about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
     position: relative;
     z-index: 1;
 }
@@ -55,6 +67,12 @@ header {
     margin-bottom: 25px;
 }
 
+.mint-title {
+    color: #98FFD3;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
 p {
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
@@ -65,7 +83,7 @@ p {
     margin-right: auto;
 }
 
-/* КНОПКИ iOS 26 STYLE */
+/* КНОПКИ iOS 26 */
 .cta-buttons {
     display: flex;
     gap: 20px;
@@ -75,28 +93,15 @@ p {
 .btn {
     padding: 16px 45px;
     text-decoration: none;
-    border-radius: 100px; /* Ультра закругление */
+    border-radius: 100px;
     font-weight: 600;
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: inline-block;
 }
 
-.btn.primary { 
-    background: #98FFD3; 
-    color: #000; 
-    box-shadow: 0 10px 25px rgba(152, 255, 211, 0.25); 
-}
+.btn.primary { background: #98FFD3; color: #000; box-shadow: 0 10px 25px rgba(152, 255, 211, 0.25); }
+.btn.secondary { border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; }
 
-.btn.secondary { 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    color: #fff; 
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(5px);
-}
-
-.btn:hover {
-    transform: scale(1.05);
-}
+.btn:hover { transform: scale(1.05); }
 
 /* БУРГЕР МЕНЮ */
 .menu-icon { cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 101; }
@@ -108,4 +113,3 @@ p {
     align-items: center; justify-content: center; gap: 30px; transition: 0.5s;
 }
 .nav-menu.active { right: 0; }
-.nav-menu a { color: #fff; text-decoration: none; font-size: 1.5rem; font-weight: 600; }
