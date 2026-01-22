@@ -1,4 +1,4 @@
-// Запуск анимаций появления
+// Инициализация анимаций появления текста
 AOS.init();
 
 const canvas = document.getElementById('particles');
@@ -7,15 +7,15 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
-const particleColor = 'rgba(152, 255, 211, 0.4)';
+const particleColor = 'rgba(152, 255, 211, 0.35)'; // Мятные частицы
 
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = Math.random() * 0.4 - 0.2;
-        this.speedY = Math.random() * 0.4 - 0.2;
+        this.size = Math.random() * 1.8;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
     }
     update() {
         this.x += this.speedX;
@@ -33,7 +33,7 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    for (let i = 0; i < 90; i++) { particlesArray.push(new Particle()); }
+    for (let i = 0; i < 95; i++) { particlesArray.push(new Particle()); }
 }
 
 function animate() {
@@ -42,11 +42,12 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Бургер
+// Меню
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 menuToggle.onclick = () => {
     navMenu.classList.toggle('active');
+    // Можно добавить анимацию иконок здесь
 };
 
 init();
@@ -58,7 +59,8 @@ window.addEventListener('resize', () => {
     init();
 });
 
-// Кнопка Сообщество ведет на форум
-document.querySelector('.btn.secondary').addEventListener('click', function() {
-    console.log("Redirecting to forum...");
+// Логика перехода на форум для кнопки "Сообщество"
+document.querySelector('.btn.secondary').addEventListener('click', function(e) {
+    // В будущем здесь будет: window.location.href = '/forum';
+    console.log("Запомнил: переход на форум активен");
 });
