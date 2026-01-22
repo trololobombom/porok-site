@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a; /* Глубокий темный цвет */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Чтобы не было лишних скроллов при анимации */
+}
+
+/* Фон с частицами */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px;
+    position: absolute;
+    width: 100%;
+}
+
+.logo {
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+
+.menu-icon span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #fff;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #a0a0a0;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+/* Кнопки */
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn.primary {
+    background: #fff;
+    color: #000;
+}
+
+.btn.secondary {
+    border: 1px solid #ffffff40;
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
