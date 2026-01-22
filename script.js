@@ -1,13 +1,12 @@
 AOS.init({ duration: 1200, once: true });
 
+// Логика частиц (без изменений, они идеальны)
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
-const particleColor = 'rgba(152, 255, 211, 0.35)'; // Тот самый мятный
-
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -23,7 +22,7 @@ class Particle {
         if (this.y > canvas.height) this.y = 0; else if (this.y < 0) this.y = canvas.height;
     }
     draw() {
-        ctx.fillStyle = particleColor;
+        ctx.fillStyle = 'rgba(152, 255, 211, 0.35)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -32,27 +31,21 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    for (let i = 0; i < 90; i++) { particlesArray.push(new Particle()); }
+    for (let i = 0; i < 90; i++) particlesArray.push(new Particle());
 }
-
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particlesArray.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
 }
 
-// Бургер меню
+// РАБОТА БУРГЕРА
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-if (menuToggle) {
-    menuToggle.onclick = () => { navMenu.classList.toggle('active'); };
-}
+
+menuToggle.onclick = () => {
+    navMenu.classList.toggle('active');
+};
 
 init();
 animate();
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
-});
